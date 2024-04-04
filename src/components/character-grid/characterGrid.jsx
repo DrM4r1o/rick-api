@@ -8,13 +8,15 @@ import Character from "../character/character"
 import Pager from "../pager/pager"
 import Filter from "../filter/Filter";
 import Loader from "../loader/Loader";
+import { useOutletContext } from "react-router-dom";
 
-function CharacterGrid({ favs, handleFavs }) {
+function CharacterGrid() {
     const [characterFiltered, setCharacterFiltered] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [page, setPage] = useState(1);
     const [lastPage, setLastPage] = useState(0);
     const [filterText, setFiterText] = useState("")
+    const [favs, handleFavs] = useOutletContext()
 
     useEffect(() => {
         setIsLoading(true);

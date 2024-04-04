@@ -20,8 +20,6 @@ export function getAllCharacters(page = 1) {
         .catch(() => {
             console.log("No existe el dominio");
         })
-        .finally(() => {
-        });
 }
 
 export function getAllCharactersByName(name, page = 1) {
@@ -43,11 +41,28 @@ export function getAllCharactersByName(name, page = 1) {
         .catch(() => {
             console.log("No existe el dominio");
         })
-        .finally(() => {
-        });
 }
 
-export function getCharacterById(id) { }
+export function getCharacterById(idCharacter) { 
+    return fetch(`${API_URL}/${idCharacter}`)
+        .then((response) => {
+            if (response.ok) {
+                return response.json()
+            } else {
+                throw new Error("No se ha podido completar");
+            }
+        })
+        .then((data) => {
+            if (data) {
+                return data;
+            } else {
+                console.error("no se ha encontrado");
+            }
+        })
+        .catch(() => {
+            console.log("No existe el dominio");
+        })
+}
 
 export function getMultipleCharactersById(ids) {
 

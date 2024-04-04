@@ -1,8 +1,11 @@
 import "./character.css";
 import { useState, useEffect } from "react";
+import { getCharacterById } from "../../services/characters.service"
+import { Link, useNavigate } from "react-router-dom";
 
 function Character({ character, favs, handleFavs }) {
     const [isFav, setIsFav] = useState(character.isFav);
+    const navigate = useNavigate()
     const keys = Object.keys(character);
 
     function handleFav() {
@@ -26,6 +29,13 @@ function Character({ character, favs, handleFavs }) {
         setIsFav(favs.includes(character.id))
     }, [favs])
 
+    // function handleClickCharacter() {
+    //     navigate(`/character/${character.id}`)
+    //     // getCharacterById(character.id).then((data) => {
+    //     //     console.log(data);
+    //     // })
+    // }
+
     return (
         <div className="character">
             <img className="img" src={character.image} />
@@ -45,6 +55,7 @@ function Character({ character, favs, handleFavs }) {
                 <button onClick={handleFav}>
                     {isFav ? <p>💖</p> : <p>🤍</p>}
                 </button>
+                <Link to={`/character/${character.id}`}>Details</Link>
             </div>
         </div>
     );

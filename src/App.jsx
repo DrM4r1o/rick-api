@@ -1,6 +1,7 @@
 import './App.css';
 
 import { useState } from 'react';
+import { Outlet } from 'react-router-dom';
 import CharacterGrid from './components/character-grid/characterGrid';
 import Header from './components/header/header';
 
@@ -18,7 +19,8 @@ function App() {
     return (
         <>
             <Header favs={favs} handleFavs={handleFavs} />
-            <CharacterGrid favs={favs} handleFavs={handleFavs} />
+            <Outlet context={[favs, handleFavs]} />
+            {/* <CharacterGrid favs={favs} handleFavs={handleFavs} /> */}
         </>
     )
 }
