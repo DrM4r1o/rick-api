@@ -1,0 +1,7 @@
+.character-grid {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    background-color: rgb(180, 180, 180);
+}
