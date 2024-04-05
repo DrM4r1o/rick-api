@@ -1,15 +1,15 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import { getCharacterById } from "../../services/characters.service"
-import { useOutletContext } from "react-router-dom"
 
 import FavButton from "../fav-button/FavButton"
+import { FavContext } from "../../contexts/FavContext"
 
 function CharacterDetails() {
     const [character, setCharacter] = useState()
     const { id } = useParams()
     const [keys, setKeys] = useState([])
-    const [favs, handleFavs] = useOutletContext()
+    const [favs] = useContext(FavContext)
     const [isFav, setIsFav] = useState(false);
 
     function objectValuesToArray(obj) {
@@ -17,10 +17,6 @@ function CharacterDetails() {
         const values = keys.map((key) => obj[key])
 
         return values.join("\n")
-    }
-
-    function handleIsFav(value) {
-        setIsFav(value)
     }
 
     useEffect(() => {
@@ -63,13 +59,11 @@ function CharacterDetails() {
                         }
                     })}
                 </div>
-                {/* <FavButton 
-                    id={id}
-                    favs={favs} 
-                    handleFavs={handleFavs} 
+                <FavButton 
+                    id={id} 
                     isFav={isFav} 
-                    handleIsFav={handleIsFav} 
-                /> */}
+                    handleIsFav={setIsFav} 
+                />
             </div>
         </>
     )

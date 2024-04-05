@@ -1,27 +1,19 @@
 import './App.css';
 
-import { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import Header from './components/header/header';
+import FavProvider from './contexts/FavContext';
 
-function getFavs() {
-    return JSON.parse(localStorage.getItem("favs") || "[]")
-}
+
 
 function App() {
-    const [favs, setFavs] = useState(getFavs());
-
-    function handleFavs(newFavs) {
-        console.log(newFavs);
-        setFavs(newFavs)
-    }
-
+    
     return (
-        <>
-            <Header favs={favs} handleFavs={handleFavs} />
-            <Outlet context={[favs, handleFavs]} />
+        <FavProvider>
+            <Header/>
+            <Outlet/>
             {/* <CharacterGrid favs={favs} handleFavs={handleFavs} /> */}
-        </>
+        </FavProvider>
     )
 }
 

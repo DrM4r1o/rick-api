@@ -1,12 +1,14 @@
 import "./character.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { getCharacterById } from "../../services/characters.service"
 import { Link, useNavigate } from "react-router-dom";
+import { FavContext } from "../../contexts/FavContext";
 
-function Character({ character, favs, handleFavs }) {
+function Character({ character }) {
     const [isFav, setIsFav] = useState(character.isFav);
     const navigate = useNavigate()
     const keys = Object.keys(character);
+    const [favs, setFavs] = useContext(FavContext)
 
     function handleFav() {
         const newIsFav = !isFav
@@ -16,10 +18,10 @@ function Character({ character, favs, handleFavs }) {
 
         if (newIsFav) {
             favsFiltered = [...favs, character.id]
-            handleFavs(favsFiltered)
+            setFavs(favsFiltered)
         } else {
             favsFiltered = favs.filter((favId) => favId !== character.id)
-            handleFavs(favsFiltered)
+            setFavs(favsFiltered)
         }
 
         localStorage.setItem("favs", JSON.stringify(favsFiltered))

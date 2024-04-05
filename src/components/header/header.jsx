@@ -1,11 +1,13 @@
 import './header.css'
 
-import { useState } from "react";
+import { useContext, useState } from "react";
 import CharactersFav from "../character-fav/CharactersFav";
 import { NavLink } from 'react-router-dom';
+import { FavContext } from '../../contexts/FavContext';
 
-function Header({ favs, handleFavs }) {
+function Header() {
     const [isFavsCharactersOpen, setIsFavsCharactersOpen] = useState(false);
+    const [favs] = useContext(FavContext)
 
     function characterFav() {
         setIsFavsCharactersOpen(!isFavsCharactersOpen);
@@ -27,7 +29,7 @@ function Header({ favs, handleFavs }) {
                 </div>
             </header>
             {isFavsCharactersOpen &&
-                <CharactersFav idCharacters={favs} handleFavs={handleFavs} />
+                <CharactersFav/>
             }
         </>
     )

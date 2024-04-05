@@ -1,14 +1,14 @@
-import "./characterGrid.css"
+import "./characterGrid.css";
 
-import { useState, useEffect } from "react"
-import { getAllCharacters, getAllCharactersByName } from "../../services/characters.service"
+import { useContext, useEffect, useState } from "react";
 import charactersAdapter from "../../adapters/models/characters.adapter";
+import { getAllCharacters, getAllCharactersByName } from "../../services/characters.service";
+import { FavContext } from "../../contexts/FavContext";
 
-import Character from "../character/character"
-import Pager from "../pager/pager"
+import Character from "../character/character";
 import Filter from "../filter/Filter";
 import Loader from "../loader/Loader";
-import { useOutletContext } from "react-router-dom";
+import Pager from "../pager/pager";
 
 function CharacterGrid() {
     const [characterFiltered, setCharacterFiltered] = useState([]);
@@ -16,7 +16,7 @@ function CharacterGrid() {
     const [page, setPage] = useState(1);
     const [lastPage, setLastPage] = useState(0);
     const [filterText, setFiterText] = useState("")
-    const [favs, handleFavs] = useOutletContext()
+    const [favs, setFavs] = useContext(FavContext)
 
     useEffect(() => {
         let delayedGetdData;
@@ -79,7 +79,6 @@ function CharacterGrid() {
                     <Character
                         key={character.id}
                         character={character}
-                        favs={favs} handleFavs={handleFavs}
                     />
                 ))}
             </div>

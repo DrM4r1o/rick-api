@@ -1,16 +1,18 @@
 import './CharactersFav.css'
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { getMultipleCharactersById } from "../../services/characters.service";
 import charactersAdapter from "../../adapters/models/characters.adapter";
+import { FavContext } from '../../contexts/FavContext';
 
 import Character from "../character/character";
 
-function CharactersFav({ idCharacters, handleFavs }) {
+function CharactersFav() {
 
     const [characterFavs, setCharacterFavs] = useState([]);
     const [isLoading, setIsLoading] = useState(false)
     const [bgColor, setBgColor] = useState("tomato")
+    const [favs] = useContext(FavContext)
 
     // useEffect(() => {
     //     const onMouseMove = (event) => {
@@ -34,7 +36,7 @@ function CharactersFav({ idCharacters, handleFavs }) {
     useEffect(() => {
         setIsLoading(true)
 
-        getMultipleCharactersById(idCharacters)
+        getMultipleCharactersById(favs)
             .then(data => {
                 const mappedCharacters = charactersAdapter(data, data.map((character) => character.id))
                 setCharacterFavs(mappedCharacters)
@@ -43,7 +45,7 @@ function CharactersFav({ idCharacters, handleFavs }) {
                 setIsLoading(false)
             })
 
-    }, [idCharacters])
+    }, [favs])
 
     if(characterFavs.length > 0) {
         return (
@@ -52,9 +54,7 @@ function CharactersFav({ idCharacters, handleFavs }) {
                 {characterFavs.map((character) => (
                     <Character 
                         key={character.id} 
-                        character={character} 
-                        favs={idCharacters} 
-                        handleFavs={handleFavs} 
+                        character={character}
                     />
                 ))}
             </div>

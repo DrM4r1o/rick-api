@@ -1,6 +1,10 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { FavContext } from "../../contexts/FavContext";
 
-function FavButton({ id, favs, handleFavs, isFav, handleIsFav }) {
+function FavButton({ id, isFav, handleIsFav }) {
+    id = Number(id)
+
+    const [favs, setFavs] = useContext(FavContext)
 
     function handleFav() {
         const newIsFav = !isFav
@@ -10,23 +14,21 @@ function FavButton({ id, favs, handleFavs, isFav, handleIsFav }) {
 
         if (newIsFav) {
             favsFiltered = [...favs, id]
-            handleFavs(favsFiltered)
+            setFavs(favsFiltered)
         } else {
             favsFiltered = favs.filter((favId) => favId !== id)
-            handleFavs(favsFiltered)
+            setFavs(favsFiltered)
         }
 
         localStorage.setItem("favs", JSON.stringify(favsFiltered))
     }
 
     return (
-        <>
-            <div className="fav">
-                <button onClick={handleFav}>
-                    {isFav ? <p>💖</p> : <p>🤍</p>}
-                </button>
-            </div>
-        </>
+        <div className="fav">
+            <button onClick={handleFav}>
+                {isFav ? <p>💖</p> : <p>🤍</p>}
+            </button>
+        </div>
     )
 }
 
