@@ -1,9 +1,11 @@
 import { useContext, useState } from "react";
 import { FavContext } from "../../contexts/FavContext";
+import { useLocalStorage } from "../../hooks/useLocalStorage";
 
 function FavButton({ id, isFav, handleIsFav }) {
     id = Number(id)
 
+    const [getLocalFavs, setLocalFavs] = useLocalStorage("favs")
     const [favs, setFavs] = useContext(FavContext)
 
     function handleFav() {
@@ -20,7 +22,7 @@ function FavButton({ id, isFav, handleIsFav }) {
             setFavs(favsFiltered)
         }
 
-        localStorage.setItem("favs", JSON.stringify(favsFiltered))
+        setLocalFavs(favsFiltered)
     }
 
     return (

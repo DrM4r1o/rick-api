@@ -1,42 +1,19 @@
 import "./character.css";
-import { useState, useEffect, useContext } from "react";
-import { getCharacterById } from "../../services/characters.service"
-import { Link, useNavigate } from "react-router-dom";
+
+import { useContext, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { FavContext } from "../../contexts/FavContext";
+
+import FavButton from "../fav-button/FavButton";
 
 function Character({ character }) {
     const [isFav, setIsFav] = useState(character.isFav);
-    const navigate = useNavigate()
     const keys = Object.keys(character);
-    const [favs, setFavs] = useContext(FavContext)
-
-    function handleFav() {
-        const newIsFav = !isFav
-        let favsFiltered = []
-
-        setIsFav(newIsFav); // ASINCRONO
-
-        if (newIsFav) {
-            favsFiltered = [...favs, character.id]
-            setFavs(favsFiltered)
-        } else {
-            favsFiltered = favs.filter((favId) => favId !== character.id)
-            setFavs(favsFiltered)
-        }
-
-        localStorage.setItem("favs", JSON.stringify(favsFiltered))
-    }
+    const [favs] = useContext(FavContext)
 
     useEffect(() => {
         setIsFav(favs.includes(character.id))
     }, [favs])
-
-    // function handleClickCharacter() {
-    //     navigate(`/character/${character.id}`)
-    //     // getCharacterById(character.id).then((data) => {
-    //     //     console.log(data);
-    //     // })
-    // }
 
     return (
         <div className="character">
@@ -53,12 +30,7 @@ function Character({ character }) {
                     }
                 })}
             </div>
-            <div className="fav">
-                <button onClick={handleFav}>
-                    {isFav ? <p>💖</p> : <p>🤍</p>}
-                </button>
-                
-            </div>
+            <FavButton id={character.id} isFav={isFav} handleIsFav={setIsFav} />
             <Link to={`/characters/${character.id}`}>Details</Link>
         </div>
     );

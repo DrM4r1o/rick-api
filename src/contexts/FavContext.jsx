@@ -1,13 +1,14 @@
 import { createContext, useState } from 'react'
+import useLocalStorage from '../hooks/useLocalStorage'
 
 export const FavContext = createContext()
 
-function getFavs() {
-    return JSON.parse(localStorage.getItem("favs") || "[]")
-}
 
-function FavProvider({children}) {
-    const [favs, setFavs] = useState(getFavs());
+
+function FavProvider({ children }) {
+    const [getLocalFavs, setLocalFavs] = useLocalStorage('favs')
+    const [favs, setFavs] = useState(getLocalFavs())
+
     return (
         <FavContext.Provider value={[favs, setFavs]}>
             {children}
