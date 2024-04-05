@@ -1,6 +1,7 @@
 header {
     display: flex;
     align-items: center;
+    justify-content: space-between;
 }
 
 p {
@@ -9,5 +10,10 @@ p {
 
 nav {
     display: flex;
-    gap: 20px;
+    gap: 30px;
+}
+
+.data-header {
+    display: flex;
+    align-items: center;
 }

@@ -8,10 +8,17 @@ function CharacterDetails() {
     const [keys, setKeys] = useState([])
     const [episodes, setEpisodes] = useState([])
 
+    function objectValuesToArray(obj) {
+        const keys = Object.keys(obj)
+        const values = keys.map((key) => obj[key])
+
+        return values.join("\n")
+    }
+
     useEffect(() => {
         getCharacterById(id).then((data) => {
             setCharacter(data)
-            setKeys(Object.keys(data).filter((key) => (key !== "origin" && key !== "location")))
+            setKeys(Object.keys(data))
             setEpisodes(data.episode)
         })
     }, [id])
@@ -30,7 +37,7 @@ function CharacterDetails() {
                 <img className="img" src={character.image} style={{ width: "200px" }} />
                 <div className="data">
                     {keys.map((key) => {
-                        if (key !== "image" && key !== "episode") {
+                        if (key !== "image" && key !== "episode" &&  typeof character[key] !== "object") {
                             return (
                                 <p key={key}>
                                     <span>{`${key.toUpperCase()}: `}</span>
@@ -38,10 +45,15 @@ function CharacterDetails() {
                                 </p>
                             );
                         }
-                    })}
-                    <p>Episodes: </p>
-                    {episodes.map((episode) => {
-                        return <p>{episode}</p>
+                        if (typeof character[key] === "object") {
+                            return (
+                                <p key={key}>
+                                    {console.log(character[key])}
+                                    <span>{`${key.toUpperCase()}: `}</span>
+                                    <span className={key}>{objectValuesToArray(character[key])}</span>
+                                </p>
+                            )
+                        }
                     })}
                 </div>
                 {/* <div className="fav">

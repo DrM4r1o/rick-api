@@ -12,8 +12,9 @@ function Filter({ handleFilter }) {
 
     return (
         <>
+            <label htmlFor="">Search: </label>
             <input type="text" onChange={(evt) => onChangeText(evt)}></input>
-            <button onClick={() => handleFilter(filterText)}>Filtrar</button>
+            <button onClick={() => handleFilter(filterText)}>Filter</button>
         </>
     )
 }

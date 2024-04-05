@@ -12,18 +12,25 @@ function Header({ favs, handleFavs }) {
     }
 
     return (
-        <header>
-            <h1>Rick And Morty API</h1>
-            <button onClick={characterFav}>💖{favs.length}</button>
-            {isFavsCharactersOpen && 
+        <>
+            <header>
+                <div>
+                    <h1>Rick And Morty API</h1>
+                </div>
+                <div className='data-header'>
+                    <nav>
+                        <NavLink to={"/"}>Home</NavLink>
+                        <NavLink to={"/characters"}>Characters</NavLink>
+                        <NavLink to={"/characters/favs"}>Favorites</NavLink>
+                    </nav>
+                    <button onClick={characterFav}>💖{favs.length}</button>
+                </div>
+            </header>
+            {isFavsCharactersOpen &&
                 <CharactersFav idCharacters={favs} handleFavs={handleFavs} />
             }
-            <nav>
-                <NavLink to={"/"}>Home</NavLink>
-                <NavLink to={"/characters"}>Characters</NavLink>
-                <NavLink to={"/characters/favs"}>Favorites</NavLink>
-            </nav>
-        </header>
+        </>
     )
 }
+
 export default Header;
