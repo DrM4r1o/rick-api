@@ -19,16 +19,19 @@ function CharacterGrid() {
     const [favs, handleFavs] = useOutletContext()
 
     useEffect(() => {
+        let delayedGetdData;
         setIsLoading(true);
 
         if (filterText !== "") {
-            getAllCharactersByName(filterText, page)
-                .then((data) => {
-                    buildCharacters(data.results, favs);
-                    setLastPage(data.info.pages);
-                })
-                .catch(err => console.error(err))
-                .finally(() => setIsLoading(false))
+            delayedGetdData = setTimeout(() => {
+                getAllCharactersByName(filterText, page)
+                    .then((data) => {
+                        buildCharacters(data.results, favs);
+                        setLastPage(data.info.pages);
+                    })
+                    .catch(err => console.error(err))
+                    .finally(() => setIsLoading(false))
+            }, 500);
         } else {
             getAllCharacters(page)
                 .then((data) => {
@@ -40,6 +43,7 @@ function CharacterGrid() {
         }
 
         return () => {
+            clearTimeout(delayedGetdData)
             //function de limpieza (cleanup)
         };
     }, [page, filterText]);

@@ -7,7 +7,7 @@ function Filter({ handleFilter }) {
         const { value } = event.target;
         const cleared = value.trim();
         setFilterText(cleared);
-        // handleFilter()
+        handleFilter(cleared)
     }
 
     return (
