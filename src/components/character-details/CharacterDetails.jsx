@@ -1,12 +1,16 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import { getCharacterById } from "../../services/characters.service"
+import { useOutletContext } from "react-router-dom"
+
+import FavButton from "../fav-button/FavButton"
 
 function CharacterDetails() {
     const [character, setCharacter] = useState()
     const { id } = useParams()
     const [keys, setKeys] = useState([])
-    const [episodes, setEpisodes] = useState([])
+    const [favs, handleFavs] = useOutletContext()
+    const [isFav, setIsFav] = useState(false);
 
     function objectValuesToArray(obj) {
         const keys = Object.keys(obj)
@@ -15,11 +19,15 @@ function CharacterDetails() {
         return values.join("\n")
     }
 
+    function handleIsFav(value) {
+        setIsFav(value)
+    }
+
     useEffect(() => {
         getCharacterById(id).then((data) => {
             setCharacter(data)
             setKeys(Object.keys(data))
-            setEpisodes(data.episode)
+            setIsFav(favs.includes(Number(id)))
         })
     }, [id])
 
@@ -48,7 +56,6 @@ function CharacterDetails() {
                         if (typeof character[key] === "object") {
                             return (
                                 <p key={key}>
-                                    {console.log(character[key])}
                                     <span>{`${key.toUpperCase()}: `}</span>
                                     <span className={key}>{objectValuesToArray(character[key])}</span>
                                 </p>
@@ -56,11 +63,13 @@ function CharacterDetails() {
                         }
                     })}
                 </div>
-                {/* <div className="fav">
-                    <button onClick={handleFav}>
-                        {isFav ? <p>💖</p> : <p>🤍</p>}
-                    </button>
-                </div> */}
+                {/* <FavButton 
+                    id={id}
+                    favs={favs} 
+                    handleFavs={handleFavs} 
+                    isFav={isFav} 
+                    handleIsFav={handleIsFav} 
+                /> */}
             </div>
         </>
     )

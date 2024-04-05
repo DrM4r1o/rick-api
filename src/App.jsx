@@ -2,7 +2,6 @@ import './App.css';
 
 import { useState } from 'react';
 import { Outlet } from 'react-router-dom';
-import CharacterGrid from './components/character-grid/characterGrid';
 import Header from './components/header/header';
 
 function getFavs() {
@@ -13,6 +12,7 @@ function App() {
     const [favs, setFavs] = useState(getFavs());
 
     function handleFavs(newFavs) {
+        console.log(newFavs);
         setFavs(newFavs)
     }
 

@@ -55,8 +55,9 @@ function Character({ character, favs, handleFavs }) {
                 <button onClick={handleFav}>
                     {isFav ? <p>💖</p> : <p>🤍</p>}
                 </button>
-                <Link to={`/characters/${character.id}`}>Details</Link>
+                
             </div>
+            <Link to={`/characters/${character.id}`}>Details</Link>
         </div>
     );
 }
