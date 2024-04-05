@@ -1,7 +1,8 @@
 import './header.css'
 
 import { useState } from "react";
-import CharacterFav from "../character-fav/CharactersFav";
+import CharactersFav from "../character-fav/CharactersFav";
+import { NavLink } from 'react-router-dom';
 
 function Header({ favs, handleFavs }) {
     const [isFavsCharactersOpen, setIsFavsCharactersOpen] = useState(false);
@@ -11,13 +12,18 @@ function Header({ favs, handleFavs }) {
     }
 
     return (
-        <>
+        <header>
             <h1>Rick And Morty API</h1>
             <button onClick={characterFav}>💖{favs.length}</button>
             {isFavsCharactersOpen && 
-                <CharacterFav idCharacters={favs} handleFavs={handleFavs} />
+                <CharactersFav idCharacters={favs} handleFavs={handleFavs} />
             }
-        </>
+            <nav>
+                <NavLink to={"/"}>Home</NavLink>
+                <NavLink to={"/characters"}>Characters</NavLink>
+                <NavLink to={"/characters/favs"}>Favorites</NavLink>
+            </nav>
+        </header>
     )
 }
 export default Header;

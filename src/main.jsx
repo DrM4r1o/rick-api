@@ -1,11 +1,13 @@
+import './index.css'
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import App from './App.jsx'
-import Test from './components/test/Test.jsx'
-import CharacterGrid from './components/character-grid/characterGrid.jsx'
-import './index.css'
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+
+import App from './App.jsx'
+import CharacterGrid from './components/character-grid/characterGrid.jsx'
 import CharacterDetails from './components/character-details/CharacterDetails.jsx'
+import HomePage from './components/home-page/HomePage.jsx';
+import FavsPage from './components/favs-page/FavsPage.jsx';
 
 const router = createBrowserRouter([
     {
@@ -14,22 +16,22 @@ const router = createBrowserRouter([
         children: [
             {
                 path: "/",
-                element: <CharacterGrid />
+                element: <HomePage />
             },
             {
-              path: "test",
-              element: <Test />,
+                path: "characters",
+                element: <CharacterGrid />,
             },
             {
-                path: "character/:id",
+                path: "characters/:id",
                 element: <CharacterDetails />
+            },
+            {
+                path: "characters/favs",
+                element: <FavsPage />
             }
         ]
     },
-    // {
-    //     path: "/test",
-    //     element: <Test />
-    // }
 ])
 
 ReactDOM.createRoot(document.getElementById('root')).render(

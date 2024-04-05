@@ -6,7 +6,7 @@ import charactersAdapter from "../../adapters/models/characters.adapter";
 
 import Character from "../character/character";
 
-function CharacterFav({ idCharacters, handleFavs }) {
+function CharactersFav({ idCharacters, handleFavs }) {
 
     const [characterFavs, setCharacterFavs] = useState([]);
     const [isLoading, setIsLoading] = useState(false)
@@ -69,4 +69,4 @@ function CharacterFav({ idCharacters, handleFavs }) {
     )
 }
 
-export default CharacterFav;
+export default CharactersFav;
