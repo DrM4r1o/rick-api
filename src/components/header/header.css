@@ -10,10 +10,6 @@ p {
 
 nav {
     display: flex;
-    gap: 30px;
-}
-
-.data-header {
-    display: flex;
     align-items: center;
+    gap: 30px;
 }

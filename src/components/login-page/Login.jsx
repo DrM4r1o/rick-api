@@ -22,6 +22,7 @@ const LoginPage = () => {
         type: types.userAdd,
         payload: user
     })
+    
     const handleUserRemove = () => dispatch({
         type: types.userRemove,
         payload: store.user.id

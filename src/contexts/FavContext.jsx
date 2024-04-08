@@ -11,14 +11,13 @@ function FavProvider({ children }) {
     const [favs, setFavs] = useState()
 
     useEffect(() => {
-        console.log(store.user)
         setLocalUser(store.user)
     }, [])
 
     useEffect(() => {
         setFavs(userLocal.favs)
     }, [userLocal])
-
+    
     return (
         <>
             {favs &&

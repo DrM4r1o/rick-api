@@ -29,25 +29,23 @@ function Header() {
                 <div>
                     <h2>Rick And Morty API</h2>
                 </div>
-                <div className='data-header'>
-                    <nav>
-                        <NavLink to={"/"}>Home</NavLink>
-                        <NavLink to={"/characters"}>Characters</NavLink>
-                        <NavLink to={"/characters/favs"}>Favorites</NavLink>
-                        {
-                            !user.name &&
-                            <NavLink to={"/login"}>Login</NavLink>
-                        }
-                        {
-                            user.name &&
-                            <>
-                                <p>{user.name} 🧔</p>
-                                <NavLink onClick={() => handleLogout()}>Logout</NavLink>
-                                <button onClick={characterFav}>{favs.length} 💖</button>
-                            </>
-                        }
-                    </nav>
-                </div>
+                <nav>
+                    <NavLink to={"/"}>Home</NavLink>
+                    <NavLink to={"/characters"}>Characters</NavLink>
+                    <NavLink to={"/characters/favs"}>Favorites</NavLink>
+                    {
+                        !user.name &&
+                        <NavLink to={"/login"}>Login</NavLink>
+                    }
+                    {
+                        user.name &&
+                        <>
+                            <p>{user.name} 🧔</p>
+                            <NavLink onClick={() => handleLogout()}>Logout</NavLink>
+                            <button onClick={characterFav}>{favs.length} 💖</button>
+                        </>
+                    }
+                </nav>
             </header>
             {isFavsCharactersOpen &&
                 <CharactersFav />
