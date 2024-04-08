@@ -1,18 +1,32 @@
-import { createContext, useState } from 'react'
+import { createContext, useEffect, useReducer, useState } from 'react'
 import useLocalStorage from '../hooks/useLocalStorage'
+import storeReducer, { initialStore } from '../reducers/storeReducer'
 
 export const FavContext = createContext()
 
-
-
 function FavProvider({ children }) {
-    const [getLocalFavs, setLocalFavs] = useLocalStorage('favs')
-    const [favs, setFavs] = useState(getLocalFavs())
+
+    const [store, dispatch] = useReducer(storeReducer, initialStore)
+    const [getLocalUser, setLocalUser, userLocal] = useLocalStorage(`user${store.user.id}`)
+    const [favs, setFavs] = useState()
+
+    useEffect(() => {
+        console.log(store.user)
+        setLocalUser(store.user)
+    }, [])
+
+    useEffect(() => {
+        setFavs(userLocal.favs)
+    }, [userLocal])
 
     return (
-        <FavContext.Provider value={[favs, setFavs]}>
-            {children}
-        </FavContext.Provider>
+        <>
+            {favs &&
+                <FavContext.Provider value={[favs, setFavs, setLocalUser, store, dispatch]}>
+                    {children}
+                </FavContext.Provider>
+            }
+        </>
     )
 }
 

@@ -5,8 +5,7 @@ import useLocalStorage from "../../hooks/useLocalStorage";
 function FavButton({ id, isFav, handleIsFav }) {
     id = Number(id)
 
-    const [getLocalFavs, setLocalFavs] = useLocalStorage("favs")
-    const [favs, setFavs] = useContext(FavContext)
+    const [favs, setFavs, setLocalUser, store, dispatch] = useContext(FavContext)
 
     function handleFav() {
         const newIsFav = !isFav
@@ -21,8 +20,11 @@ function FavButton({ id, isFav, handleIsFav }) {
             favsFiltered = favs.filter((favId) => favId !== id)
             setFavs(favsFiltered)
         }
-
-        setLocalFavs(favsFiltered)
+        
+        setLocalUser({
+            ...store.user,
+            favs: favsFiltered
+        })
     }
 
     return (

@@ -1,8 +1,9 @@
 import { useState } from "react";
+import { initialStore } from "../reducers/storeReducer";
 
 const useLocalStorage = (key) => {
-    const [data, setData] = useState(JSON.parse(localStorage.getItem(key) || "[]"))
-
+    const [data, setData] = useState(JSON.parse(localStorage.getItem(key) || JSON.stringify(initialStore)))
+    
     function getLocal(){
         return data
     }
@@ -12,7 +13,7 @@ const useLocalStorage = (key) => {
         setData(newData)
     }
     
-    return [getLocal, setLocal]
+    return [getLocal, setLocal, data]
 }
 
 export default useLocalStorage

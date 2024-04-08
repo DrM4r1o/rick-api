@@ -8,6 +8,7 @@ import CharacterGrid from './components/character-grid/characterGrid.jsx'
 import CharacterDetails from './components/character-details/CharacterDetails.jsx'
 import HomePage from './components/home-page/HomePage.jsx';
 import FavsPage from './components/favs-page/FavsPage.jsx';
+import LoginPage from './components/login-page/Login.jsx';
 
 const router = createBrowserRouter([
     {
@@ -17,6 +18,10 @@ const router = createBrowserRouter([
             {
                 path: "/",
                 element: <HomePage />
+            },
+            {
+                path: "login",
+                element: <LoginPage />,
             },
             {
                 path: "characters",
