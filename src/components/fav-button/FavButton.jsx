@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { FavContext } from "../../contexts/FavContext";
-import { useLocalStorage } from "../../hooks/useLocalStorage";
+import useLocalStorage from "../../hooks/useLocalStorage";
 
 function FavButton({ id, isFav, handleIsFav }) {
     id = Number(id)
