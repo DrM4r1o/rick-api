@@ -22,6 +22,21 @@ export function getAllCharacters(page = 1) {
         })
 }
 
+export async function getAllCharactersAwait(page = 1) {
+    try {
+        const response = await fetch(`${API_URL}?page=${page}`)
+        const data = await response.json()
+        
+        if (!response.ok || !data.results) {
+            throw new Error("Error during request");
+        }
+
+        return data
+    } catch (error) {
+        console.error(error);
+    }
+}
+
 export function getAllCharactersByName(name, page = 1) {
     return fetch(`${API_URL}/?page=${page}&name=${name}`)
         .then((response) => {

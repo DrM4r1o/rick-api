@@ -2,7 +2,7 @@ import "./characterGrid.css";
 
 import { useContext, useEffect, useState } from "react";
 import charactersAdapter from "../../adapters/models/characters.adapter";
-import { getAllCharacters, getAllCharactersByName } from "../../services/characters.service";
+import { getAllCharacters, getAllCharactersAwait, getAllCharactersByName } from "../../services/characters.service";
 import { FavContext } from "../../contexts/FavContext";
 
 import Character from "../character/character";
@@ -35,7 +35,7 @@ function CharacterGrid() {
                     .finally(() => setIsLoading(false))
             }, 500);
         } else {
-            getAllCharacters(page)
+            getAllCharactersAwait(page)
                 .then((data) => {
                     buildCharacters(data.results, favs);
                     setLastPage(data.info.pages);
