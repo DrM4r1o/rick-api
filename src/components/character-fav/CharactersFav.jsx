@@ -13,7 +13,7 @@ function CharactersFav() {
     const [isLoading, setIsLoading] = useState(false)
     const [bgColor, setBgColor] = useState("tomato")
 
-    const [setLocalUser, store, dispatch] = useContext(FavContext)
+    const [, store] = useContext(FavContext)
     const { favs } = store.user
 
     useEffect(() => {

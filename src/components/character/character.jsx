@@ -10,7 +10,7 @@ function Character({ character }) {
     const [isFav, setIsFav] = useState(character.isFav)
     const keys = Object.keys(character)
 
-    const [setLocalUser, store, dispatch] = useContext(FavContext)
+    const [, store] = useContext(FavContext)
     const { favs } = store.user
 
     useEffect(() => {

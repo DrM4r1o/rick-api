@@ -17,7 +17,7 @@ function CharacterGrid() {
     const [lastPage, setLastPage] = useState(0);
     const [filterText, setFiterText] = useState("")
 
-    const [setLocalUser, store, dispatch] = useContext(FavContext)
+    const [, store] = useContext(FavContext)
     const { favs } = store.user
 
     useEffect(() => {

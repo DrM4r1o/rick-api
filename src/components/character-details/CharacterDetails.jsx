@@ -11,7 +11,7 @@ function CharacterDetails() {
     const [keys, setKeys] = useState([])
     const [isFav, setIsFav] = useState(false)
 
-    const [setLocalUser, store, dispatch] = useContext(FavContext)
+    const [, store] = useContext(FavContext)
     const { favs } = store.favs
 
     function objectValuesToArray(obj) {

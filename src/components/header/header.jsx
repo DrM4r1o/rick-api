@@ -8,7 +8,7 @@ import CharactersFav from "../character-fav/CharactersFav";
 
 function Header() {
     const [isFavsCharactersOpen, setIsFavsCharactersOpen] = useState(false);
-    const [setLocalUser, store, dispatch] = useContext(FavContext)
+    const [, store, dispatch] = useContext(FavContext)
     const { user } = store
 
     const characterFav = () => setIsFavsCharactersOpen(!isFavsCharactersOpen);

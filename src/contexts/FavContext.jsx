@@ -7,7 +7,7 @@ export const FavContext = createContext()
 function FavProvider({ children }) {
 
     const [store, dispatch] = useReducer(storeReducer, initialStore)
-    const [getLocalUser, setLocalUser, userLocal] = useLocalStorage(`user${store.user.id}`)
+    const [setLocalUser, userLocal] = useLocalStorage(`user${store.user.id}`)
     const [favs, setFavs] = useState()
 
     useEffect(() => {

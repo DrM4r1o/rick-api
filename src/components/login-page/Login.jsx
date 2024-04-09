@@ -5,7 +5,7 @@ import { types } from "../../reducers/storeReducer";
 import uuidAdapter from "../../adapters/plugins/uuid.adapter";
 
 const LoginPage = () => {
-    const [setLocalUser, store, dispatch] = useContext(FavContext)
+    const [, store, dispatch] = useContext(FavContext)
     const { user } = store
     const newUser = {
         id: uuidAdapter(),
