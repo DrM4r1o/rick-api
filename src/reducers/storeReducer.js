@@ -1,12 +1,11 @@
-import useLocalStorage from "../hooks/useLocalStorage"
 
 export const types = {
     userAdd: 'USER_ADD',
     userRemove: 'USER_REMOVE',
     userFind: 'USER_FIND',
+    favsGet: 'FAVS_GET',
     favsAdd: 'FAVS_ADD',
     favsRemove: 'FAVS_REMOVE',
-    getLocalUser: 'GET_LOCAL_USER'
 }
 
 export const initialStore = {
@@ -17,21 +16,20 @@ export const initialStore = {
     }
 }
 
-// const findUser = (newUserName) => {
-//     let newUser
+const findUser = (username) => {
+    const users = []
 
-//     for(const user in localStorage) {
-//         if(user.includes("user")) {
-//             const userFinded = JSON.parse(localStorage.getItem(user))
-//             newUser = userFinded.name === newUserName ? userFinded : null
-//         }
-//     }
+    for(const user in localStorage) {
+        if(user.includes("user")) {
+            const userFinded = JSON.parse(localStorage.getItem(user))
+            users.push(userFinded)
+        }
+    }
 
-//     return newUser
-// }
+    return users.filter(user => user.name.toUpperCase() === username.toUpperCase())[0]
+}
 
 const storeReducer = (state, action) => {
-
     switch (action.type) {
         case types.userAdd:
             return {
@@ -46,14 +44,9 @@ const storeReducer = (state, action) => {
                 }
             }
         case types.userFind:
-            return 
-        case types.favsGet:
             return {
                 ...state,
-                user: {
-                    ...state.user,
-                    favs: getLocalUser().favs
-                }
+                user: findUser(action.payload.name) ?? action.payload
             }
         case types.favsAdd:
             return {

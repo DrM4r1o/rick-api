@@ -17,11 +17,15 @@ function FavProvider({ children }) {
     useEffect(() => {
         setFavs(userLocal.favs)
     }, [userLocal])
-    
+
+    useEffect(() => {
+        setFavs(store.user.favs)
+    }, [store.user.favs])
+
     return (
         <>
             {favs &&
-                <FavContext.Provider value={[favs, setFavs, setLocalUser, store, dispatch]}>
+                <FavContext.Provider value={[setLocalUser, store, dispatch]}>
                     {children}
                 </FavContext.Provider>
             }

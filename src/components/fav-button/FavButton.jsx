@@ -1,11 +1,17 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { FavContext } from "../../contexts/FavContext";
-import useLocalStorage from "../../hooks/useLocalStorage";
+import { types } from "../../reducers/storeReducer";
 
 function FavButton({ id, isFav, handleIsFav }) {
     id = Number(id)
 
-    const [favs, setFavs, setLocalUser, store, dispatch] = useContext(FavContext)
+    const [setLocalUser, store, dispatch] = useContext(FavContext)
+    const { favs } = store.user
+
+    const modifyFavs = (favsFiltered) =>  dispatch({
+        type: types.favsAdd,
+        payload: favsFiltered
+    })
 
     function handleFav() {
         const newIsFav = !isFav
@@ -15,12 +21,13 @@ function FavButton({ id, isFav, handleIsFav }) {
 
         if (newIsFav) {
             favsFiltered = [...favs, id]
-            setFavs(favsFiltered)
         } else {
             favsFiltered = favs.filter((favId) => favId !== id)
-            setFavs(favsFiltered)
         }
         
+        modifyFavs(favsFiltered)
+        
+        // Revisar si es incesario
         setLocalUser({
             ...store.user,
             favs: favsFiltered

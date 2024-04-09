@@ -12,26 +12,9 @@ function CharactersFav() {
     const [characterFavs, setCharacterFavs] = useState([]);
     const [isLoading, setIsLoading] = useState(false)
     const [bgColor, setBgColor] = useState("tomato")
-    const [favs] = useContext(FavContext)
 
-    // useEffect(() => {
-    //     const onMouseMove = (event) => {
-    //         if(event.clientX < window.innerWidth / 2) {
-    //             setBgColor("tomato")
-    //         } else {
-    //             setBgColor("limegreen")
-    //         }
-
-    //         // console.log(event.clientX);
-    //     }
-
-    //     window.addEventListener("mousemove", onMouseMove)
-
-    //     return () => {
-    //         window.removeEventListener("mousemove", onMouseMove)
-    //     }
-    // }, [])
-
+    const [setLocalUser, store, dispatch] = useContext(FavContext)
+    const { favs } = store.user
 
     useEffect(() => {
         setIsLoading(true)

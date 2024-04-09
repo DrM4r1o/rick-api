@@ -1,26 +1,31 @@
-import './header.css'
+import './header.css';
 
-import { useContext, useEffect, useState } from "react";
-import CharactersFav from "../character-fav/CharactersFav";
+import { useContext, useState } from "react";
 import { NavLink } from 'react-router-dom';
 import { FavContext } from '../../contexts/FavContext';
 import { types } from '../../reducers/storeReducer';
+import CharactersFav from "../character-fav/CharactersFav";
 
 function Header() {
     const [isFavsCharactersOpen, setIsFavsCharactersOpen] = useState(false);
-    const [favs, setFavs, setLocalUser, store, dispatch] = useContext(FavContext)
+    const [setLocalUser, store, dispatch] = useContext(FavContext)
     const { user } = store
 
-    function characterFav() {
-        setIsFavsCharactersOpen(!isFavsCharactersOpen);
-    }
+    const characterFav = () => setIsFavsCharactersOpen(!isFavsCharactersOpen);
+
+    const resetFavs = () => dispatch({
+        type: types.favsAdd,
+        payload: []
+    })
+
+    const removeUser = () => dispatch({
+        type: types.userRemove,
+        payload: store.user.id
+    })
 
     function handleLogout() {
-        setFavs([])
-        dispatch({
-            type: types.userRemove,
-            payload: store.user.id
-        })
+        resetFavs()
+        removeUser()
     }
 
     return (
@@ -42,7 +47,7 @@ function Header() {
                         <>
                             <p>{user.name} 🧔</p>
                             <NavLink onClick={() => handleLogout()}>Logout</NavLink>
-                            <button onClick={characterFav}>{favs.length} 💖</button>
+                            <button onClick={characterFav}>{user.favs.length} 💖</button>
                         </>
                     }
                 </nav>

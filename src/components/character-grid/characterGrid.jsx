@@ -16,7 +16,9 @@ function CharacterGrid() {
     const [page, setPage] = useState(1);
     const [lastPage, setLastPage] = useState(0);
     const [filterText, setFiterText] = useState("")
-    const [favs, setFavs] = useContext(FavContext)
+
+    const [setLocalUser, store, dispatch] = useContext(FavContext)
+    const { favs } = store.user
 
     useEffect(() => {
         let delayedGetdData;

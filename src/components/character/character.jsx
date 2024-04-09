@@ -7,9 +7,11 @@ import { FavContext } from "../../contexts/FavContext";
 import FavButton from "../fav-button/FavButton";
 
 function Character({ character }) {
-    const [isFav, setIsFav] = useState(character.isFav);
-    const keys = Object.keys(character);
-    const [favs] = useContext(FavContext)
+    const [isFav, setIsFav] = useState(character.isFav)
+    const keys = Object.keys(character)
+
+    const [setLocalUser, store, dispatch] = useContext(FavContext)
+    const { favs } = store.user
 
     useEffect(() => {
         setIsFav(favs.includes(character.id))

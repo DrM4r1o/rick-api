@@ -9,8 +9,10 @@ function CharacterDetails() {
     const [character, setCharacter] = useState()
     const { id } = useParams()
     const [keys, setKeys] = useState([])
-    const [favs] = useContext(FavContext)
-    const [isFav, setIsFav] = useState(false);
+    const [isFav, setIsFav] = useState(false)
+
+    const [setLocalUser, store, dispatch] = useContext(FavContext)
+    const { favs } = store.favs
 
     function objectValuesToArray(obj) {
         const keys = Object.keys(obj)
