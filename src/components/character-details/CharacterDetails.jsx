@@ -12,7 +12,7 @@ function CharacterDetails() {
     const [isFav, setIsFav] = useState(false)
 
     const [, store] = useContext(FavContext)
-    const { favs } = store.favs
+    const { favs } = store.user
 
     function objectValuesToArray(obj) {
         const keys = Object.keys(obj)
@@ -28,6 +28,10 @@ function CharacterDetails() {
             setIsFav(favs.includes(Number(id)))
         })
     }, [id])
+
+    useEffect(() => {
+        setIsFav(favs.includes(Number(id)))
+    }, [favs])
 
     if (character === undefined) {
         return (
