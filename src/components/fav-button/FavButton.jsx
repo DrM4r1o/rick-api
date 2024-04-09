@@ -13,12 +13,12 @@ function FavButton({ id, isFav, handleIsFav }) {
         payload: favsFiltered
     })
 
-    function handleFav() {
+    const handleFav = () => {
         const newIsFav = !isFav
         let favsFiltered = []
-
+    
         handleIsFav(newIsFav); // ASINCRONO
-
+    
         if (newIsFav) {
             favsFiltered = [...favs, id]
         } else {
@@ -27,7 +27,6 @@ function FavButton({ id, isFav, handleIsFav }) {
         
         modifyFavs(favsFiltered)
         
-        // Revisar si es incesario
         setLocalUser({
             ...store.user,
             favs: favsFiltered

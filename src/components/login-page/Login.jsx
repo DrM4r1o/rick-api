@@ -2,15 +2,13 @@ import { useContext } from "react";
 import { FavContext } from "../../contexts/FavContext";
 import { types } from "../../reducers/storeReducer";
 
-import { v4 as uuidv4 } from 'uuid';
-
-//uuid -> libreria de terceros muy popular para crear Ids
+import uuidAdapter from "../../adapters/plugins/uuid.adapter";
 
 const LoginPage = () => {
     const [setLocalUser, store, dispatch] = useContext(FavContext)
     const { user } = store
     const newUser = {
-        id: uuidv4(),
+        id: uuidAdapter(),
         name: "",
         favs: []
     }
