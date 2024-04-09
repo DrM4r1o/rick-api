@@ -11,7 +11,7 @@ function CharactersFav() {
 
     const [characterFavs, setCharacterFavs] = useState([]);
     const [isLoading, setIsLoading] = useState(false)
-    const [bgColor, setBgColor] = useState("tomato")
+    const [bgColor, setBgColor] = useState("#1FA4EA")
 
     const [, store] = useContext(FavContext)
     const { favs } = store.user

@@ -38,18 +38,20 @@ function Header() {
                     <NavLink to={"/"}>Home</NavLink>
                     <NavLink to={"/characters"}>Characters</NavLink>
                     <NavLink to={"/characters/favs"}>Favorites</NavLink>
-                    {
-                        !user.name &&
-                        <NavLink to={"/login"}>Login</NavLink>
-                    }
-                    {
-                        user.name &&
+                    {user.name ? (
                         <>
                             <p>{user.name} 🧔</p>
                             <NavLink onClick={() => handleLogout()}>Logout</NavLink>
-                            <button onClick={characterFav}>{user.favs.length} 💖</button>
+                            <button 
+                                style={{ background: isFavsCharactersOpen && "#1FA4EA" }} 
+                                onClick={characterFav}
+                            >
+                                {user.favs.length} 💖
+                            </button>
                         </>
-                    }
+                    ) : (
+                        <NavLink to={"/login"}>Login</NavLink>
+                    )}
                 </nav>
             </header>
             {isFavsCharactersOpen &&
